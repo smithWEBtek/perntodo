@@ -29,14 +29,24 @@ const ListTodos = () => {
   //     })
   // }, []);
 
-  console.log(todos);
+  const deleteTodo = async (id) => {
+    try {
+      // await fetch(`http://localhost:5000/todos/${id}`, {method: "DELETE"})
+      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {method: "DELETE"})
+      console.log('deleteTodo: ', deleteTodo);
+      setTodos(todos.filter(todo => todo.todo_id !== id))
+    } catch (error) {
+      console.error('error: ', error.message)
+    }
+  }
+
 
   const renderedTodos = todos.map(todo => {
     return (<tr key={todo.todo_id}>
       <td>{todo.todo_id}</td>
       <td>{todo.description}</td>
       <td>Edit</td>
-      <td>X</td>
+      <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>X</button></td>
     </tr>
     )
   });
