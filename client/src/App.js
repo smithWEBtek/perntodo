@@ -7,12 +7,12 @@ function App() {
     <Fragment>
       <div className="container text-center">
 
-      <hr />
-      <InputTodo />
-      <ListTodos />
-</div>
+        <hr />
+        <InputTodo />
+        <ListTodos />
+      </div>
     </Fragment>
-);
+  );
 }
 
 export default App;
