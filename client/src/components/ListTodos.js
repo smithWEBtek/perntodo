@@ -12,12 +12,12 @@ const ListTodos = () => {
     }
   }
 
-  // separate function for getting todos, using async/await ^^
+  //2. Separate function for getting todos, using async/await ^^
   useEffect(() => {
     getTodos();
   }, [])
 
-  //  doing it all in useEffect without async/await
+  // 1. Doing it all in useEffect without async/await
   // useEffect(() => {
   //   fetch('http://localhost:5000/todos', {
   //     headers: { "Content-Type": "application/json" },
