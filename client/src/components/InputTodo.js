@@ -14,6 +14,8 @@ const InputTodo = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
+
+      window.location = "/" // refreshes to show changes
     } catch (error) {
       console.log('error: ', error.message);
     }

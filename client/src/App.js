@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import InputTodo from './components/InputTodo'
+import ListTodos from './components/ListTodos'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
 
       <hr />
       <InputTodo />
+      <ListTodos />
 </div>
     </Fragment>
 );
