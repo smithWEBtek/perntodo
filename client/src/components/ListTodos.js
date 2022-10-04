@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import EditTodo from './EditTodo';
 
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -12,26 +13,12 @@ const ListTodos = () => {
     }
   }
 
-  //2. Separate function for getting todos, using async/await ^^
   useEffect(() => {
     getTodos();
   }, [])
 
-  // 1. Doing it all in useEffect without async/await
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/todos', {
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log('data: ', data);
-  //       setTodos(data);
-  //     })
-  // }, []);
-
   const deleteTodo = async (id) => {
     try {
-      // await fetch(`http://localhost:5000/todos/${id}`, {method: "DELETE"})
       const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {method: "DELETE"})
       console.log('deleteTodo: ', deleteTodo);
       setTodos(todos.filter(todo => todo.todo_id !== id))
@@ -40,12 +27,11 @@ const ListTodos = () => {
     }
   }
 
-
   const renderedTodos = todos.map(todo => {
     return (<tr key={todo.todo_id}>
       <td>{todo.todo_id}</td>
       <td>{todo.description}</td>
-      <td>Edit</td>
+      <td>{<EditTodo todo={todo}/>}</td>
       <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>X</button></td>
     </tr>
     )
