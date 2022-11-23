@@ -1,11 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react'
 
 const InputTodo = () => {
   const [description, setDescription] = useState('')
 
+  const onChangeDescription = (e) => {
+    e.preventDefault()
+    setDescription(e.target.value)
+  }
+
   const onSubmitForm = async (e) => {
-    e.preventDefault();
-    console.log('description: ', description)
+    e.preventDefault()
 
     try {
       const body = { description }
@@ -13,11 +17,11 @@ const InputTodo = () => {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
-      });
+      })
 
       window.location = "/" // refreshes to show changes
     } catch (error) {
-      console.log('error: ', error.message);
+      console.error('error: ', error.message)
     }
   }
 
@@ -30,13 +34,13 @@ const InputTodo = () => {
           type="text"
           className="form-control"
           value={description}
-          onChange={event => setDescription(event.target.value)}></input>
+          onChange={onChangeDescription}></input>
         <button
           type="submit"
           className="btn btn-success">Add</button>
       </form>
     </Fragment>
   )
-};
+}
 
-export default InputTodo;
+export default InputTodo

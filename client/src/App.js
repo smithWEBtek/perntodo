@@ -6,13 +6,11 @@ function App() {
   return (
     <Fragment>
       <div className="container text-center">
-
-      <hr />
-      <InputTodo />
-      <ListTodos />
-</div>
+        <InputTodo />
+        <ListTodos />
+      </div>
     </Fragment>
-);
+  );
 }
 
 export default App;
