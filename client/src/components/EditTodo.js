@@ -20,8 +20,6 @@ export const EditTodo = ({ todo }) => {
     } catch (error) {
       console.log('error: ', error.message);
     }
-
-
   };
 
   return (
@@ -34,7 +32,9 @@ export const EditTodo = ({ todo }) => {
       >
         Edit
       </button>
-      <div className="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}>
+        {/* this was there, but why? The click to update description is on the button, not the modal div */}
+        {/* <div className="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}> */}
+      <div className="modal" id={`id${todo.todo_id}`}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
