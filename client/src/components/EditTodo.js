@@ -1,24 +1,24 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState } from "react";
 
 export const EditTodo = ({ todo }) => {
-  const [description, setDescription] = useState(todo.description)
+  const [description, setDescription] = useState(todo.description);
 
   const handleDescriptionChange = (e) => {
-    setDescription(e.target.value)
+    setDescription(e.target.value);
   };
 
   const updateDescription = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const body = { description }
-      const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+      const body = { description };
+      await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      })
-      window.location = '/'
+        body: JSON.stringify(body),
+      });
+      window.location = "/";
     } catch (error) {
-      console.log('error: ', error.message);
+      console.log("error: ", error.message);
     }
   };
 
@@ -32,8 +32,8 @@ export const EditTodo = ({ todo }) => {
       >
         Edit
       </button>
-        {/* this was there, but why? The click to update description is on the button, not the modal div */}
-        {/* <div className="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}> */}
+      {/* this was there, but why? The click to update description is on the button, not the modal div */}
+      {/* <div className="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}> */}
       <div className="modal" id={`id${todo.todo_id}`}>
         <div className="modal-dialog">
           <div className="modal-content">
@@ -45,7 +45,8 @@ export const EditTodo = ({ todo }) => {
                 data-dismiss="modal"
                 onClick={() => setDescription(todo.description)}
               >
-                &times;</button>
+                &times;
+              </button>
             </div>
             <div className="modal-body">
               <input
@@ -60,23 +61,25 @@ export const EditTodo = ({ todo }) => {
                 type="button"
                 className="btn btn-success"
                 data-dismiss="modal"
-                onClick={e => updateDescription(e)}
+                onClick={(e) => updateDescription(e)}
               >
-                Save</button>
- 
+                Save
+              </button>
+
               <button
                 type="button"
                 className="btn btn-danger"
                 data-dismiss="modal"
                 onClick={() => setDescription(todo.description)}
               >
-                Cancel</button>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default EditTodo;
