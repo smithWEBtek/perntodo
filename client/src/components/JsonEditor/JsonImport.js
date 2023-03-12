@@ -1,54 +1,25 @@
-import React, { Fragment, useState } from 'react'
+import SampleJson from "./JsonSample";
 
-const JsonImport = () => {
-  const [patProblem, setPatProblem] = useState({
-    pat_problem_id: null,
-    asset_id: null,
-    pat_json: "''::jsonb"
-  })
+const data = {
+  pat_problem_id: SampleJson.pat_problem_id,
+  asset_id: SampleJson.asset_id,
+  pat_json_modified: `${JSON.stringify(SampleJson.pat_json_modified)}`,
+  pat_json: SampleJson.pat_json,
+};
 
-  const onChangeDescription = (e) => {
-    e.preventDefault()
-    setDescription(e.target.value)
+// const JsonImport = async ({problem}) => {
+const JsonImport = async () => {
+  console.log("------db -----data: ", data);
+  try {
+    const body = data;
+    await fetch("http://localhost:5000/problem", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch (error) {
+    console.error("error: ", error.message);
   }
+};
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault()
-
-    try {
-      const body = { description }
-      await fetch("http://localhost:5000/todos", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      })
-
-      window.location = "/" // refreshes to show changes
-    } catch (error) {
-      console.error('error: ', error.message)
-    }
-  }
-
-  return (
-    <Fragment>
-      <h1 className="text-center mt-5">pern TODO List</h1>
-      <hr />
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          className="form-control"
-          value={description}
-          onChange={onChangeDescription}></input>
-        <button
-          type="submit"
-          className="btn btn-success">Add</button>
-      </form>
-    </Fragment>
-  )
-}
-
-export default patProblem, setPatProbl{
-  pat_problem_id: null,
-  asset_id: null,
-  pat_json: "''::jsonb"
-}
+export default JsonImport;
