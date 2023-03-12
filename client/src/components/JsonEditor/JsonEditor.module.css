@@ -5,6 +5,10 @@
 }
 
 .copied {
-    border: 3px siolid green;
+    border: 3px solid green;
     background-color: palegreen;
+}
+
+.jsonform {
+    border: '3px dashed red';
 }
