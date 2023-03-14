@@ -5,16 +5,20 @@ import classes from "./JsonEditor.module.css";
 const JsonEditor = () => {
   const [patJson, setPatJson] = useState("");
   const [patJsonPlaceholder, setPatJsonPlaceholder] = useState(
-    "Paste JSON here, then click COPY to Clipboard below"
+    "1: Paste JSON \n2: MODIFY \n3: COPY or IMPORT"
   );
+  const [patProblemIdPlaceholder, setPatProblemIdPlaceholder] = useState("pat_problem_id")
+  const [assetIdPlaceholder, setAssetIdPlaceholder] = useState("asset_id")
+  
+  
   const [copied, setCopied] = useState(false);
-  const [copyButtonText, setCopycopyButtonText] = useState("COPY to clipboard");
+  const [copyButtonText, setCopycopyButtonText] = useState("COPY");
 
-  const [modifiedData, setModifiedData] = useState(false);
-  const [modifyBtnText, setModifyBtnText] = useState("MODIFY JSON data");
+  const [modified, setModifiedData] = useState(false);
+  const [modifyBtnText, setModifyBtnText] = useState("MODIFY");
 
   const [imported, setImported] = useState(false);
-  const [importBtnText, setImportBtnText] = useState("IMPORT to database");
+  const [importBtnText, setImportBtnText] = useState("IMPORT");
 
   const [patProblem, setPatProblem] = useState({
     pat_problem_id: "",
@@ -39,7 +43,7 @@ const JsonEditor = () => {
     setPatProblem({...patProblem, pat_json: `'${e.target.value}'::jsonb`})
     // setPatProblem({ ...patProblem, pat_json: e.target.value });
     setCopied(false);
-    setCopycopyButtonText("Copy to clipboard");
+    setCopycopyButtonText("COPY");
   };
 
   useEffect(() => {
@@ -49,29 +53,28 @@ const JsonEditor = () => {
   const modifyData = () => {
     const replacements = {
       tilepoolfrac: "dropdownselect",
-      dropdownselectfrac: "dropdownselect",
       TilePoolTemplate: "TilePool2",
       tilepool: "dropdownselect",
     };
     setPatJson(
       patJson.replace(
-        /tilepool|TilePoolTemplate|tilepoolfrac|dropdownselectfrac/g,
+        /tilepoolfrac|TilePoolTemplate|tilepool/g,
         (matched) => replacements[matched]
       )
     );
     setModifiedData(
       patJson.replace(
-        /tilepool|TilePoolTemplate|tilepoolfrac|dropdownselectfrac/g,
+        /tilepoolfrac|TilePoolTemplate|tilepool/g,
         (matched) => replacements[matched]
       )
     );
-    setModifyBtnText('DATA MODIFIED')
-    // setPatJson("asdf") // set back to placeholder
+    setModifyBtnText('MODIFIED')
+    // setPatJson("") // set back to placeholder
   };
 
   const copyModifiedData = () => {
     setCopied(true);
-    setCopycopyButtonText("COPY SUCCESSFUL");
+    setCopycopyButtonText("COPIED!");
     let inputTextArea = document.getElementById("patjson");
     navigator.clipboard.writeText(inputTextArea.value);
     setPatJsonPlaceholder("JSON data copied to clipboard");
@@ -79,33 +82,52 @@ const JsonEditor = () => {
 
   const importModifiedData = () => {
     console.log("patProblem: ", patProblem);
-    setImportBtnText("JSON data imported!");
+    setImportBtnText("IMPORTED!");
     // JsonImport(patProblem)
     JsonImport()
   };
 
+  const resetForm = () => {
+    setCopied(false)
+    setCopycopyButtonText("COPY")
+    setImported(false)
+    setImportBtnText("IMPORT")
+    setModifyBtnText("MODIFY")
+    setPatJson("")
+    setPatJsonPlaceholder("1: Paste JSON \n2: MODIFY \n3: COPY or IMPORT")
+    setAssetIdPlaceholder("asset_id ...")
+    setPatProblemIdPlaceholder("pat_problem_id ...")
+    setPatProblem({
+      pat_problem_id: "",
+      asset_id: "",
+      pat_json: "",
+      pat_json_modified: "",
+    });
+  }
+
   return (
     <div className={classes.jsonform}>
+      <label></label>
       <input
         id="patproblemid"
         name="patProblemId"
         value={patProblem.pat_problem_id}
-        placeholder="pat_problem_id ..."
+        placeholder={patProblemIdPlaceholder}
         onChange={onChangePatProblemId}
       />
       <input
         id="assetid"
         name="assetId"
         value={patProblem.asset_id}
-        placeholder="asset_id ..."
+        placeholder={assetIdPlaceholder}
         onChange={onChangeAssetId}
       />
       <textarea
         id="patjson"
         type="text"
         className={classes.inputBox}
-        // value={modifiedData}
-        // value={patProblem.pat_json || modifiedData}
+        // value={modified}
+        // value={patProblem.pat_json || modified}
         value={patJson}
         placeholder={patJsonPlaceholder}
         onChange={onChangePatJson}
@@ -113,7 +135,7 @@ const JsonEditor = () => {
       <p>
         <button
           onClick={modifyData}
-          className={modifiedData ? classes.modified : undefined}
+          className={modified ? classes.modified : undefined}
         >
           {modifyBtnText}
         </button>
@@ -128,6 +150,11 @@ const JsonEditor = () => {
           className={imported ? classes.imported : undefined}
         >
           {importBtnText}
+        </button>
+        <button
+          onClick={resetForm}
+        >
+          RESET
         </button>
       </p>
     </div>

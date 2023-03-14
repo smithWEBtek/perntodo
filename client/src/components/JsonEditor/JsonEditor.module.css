@@ -9,6 +9,23 @@
     background-color: palegreen;
 }
 
+.modified {
+    border: 3px solid green;
+    background-color: palegreen;
+}
+
+.imported {
+    border: 3px solid green;
+    background-color: palegreen;
+}
+
 .jsonform {
     border: '3px dashed red';
+}
+
+button {
+    border-radius: 7px;
+    margin-right: 10px;
+    width: auto;
+    height: 30px;
 }
