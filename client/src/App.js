@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import InputTodo from './components/InputTodo'
-import ListTodos from './components/ListTodos'
+import InputTodo from './components/Todo/InputTodo'
+import ListTodos from './components/Todo/ListTodos'
 import JsonEditor from './components/JsonEditor/JsonEditor';
 
 function App() {
