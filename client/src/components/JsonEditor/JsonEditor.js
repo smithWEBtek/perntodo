@@ -42,7 +42,6 @@ const JsonEditor = () => {
     e.preventDefault();
     setPatJson(e.target.value);
     setPatProblem({ ...patProblem, pat_json: `'${e.target.value}'::jsonb` });
-    // setPatProblem({ ...patProblem, pat_json: e.target.value });
     setCopied(false);
     setCopycopyButtonText("COPY");
   };
@@ -71,7 +70,6 @@ const JsonEditor = () => {
     );
     setModified(true);
     setModifyBtnText("MODIFIED");
-    // setPatJson("") // set back to placeholder
   };
 
   const copyModifiedData = () => {
@@ -83,11 +81,12 @@ const JsonEditor = () => {
   };
 
   const importModifiedData = () => {
+    console.log('*******');
+    console.log('patProblem importModifiedData: ', patProblem);
+
+    JsonImport(patProblem)
     setImported(true)
-    console.log("patProblem: ", patProblem);
     setImportBtnText("IMPORTED");
-    // JsonImport(patProblem)
-    JsonImport();
   };
 
   const resetForm = () => {
@@ -104,7 +103,7 @@ const JsonEditor = () => {
     setPatJsonPlaceholder("1: Paste JSON \n2: MODIFY \n3: COPY or IMPORT");
     setAssetIdPlaceholder("asset_id ...");
     setPatProblemIdPlaceholder("pat_problem_id ...");
-    
+
     setPatProblem({
       pat_problem_id: "",
       asset_id: "",
@@ -136,8 +135,6 @@ const JsonEditor = () => {
         id="patjson"
         type="text"
         className={classes.inputBoxText}
-        // value={modified}
-        // value={patProblem.pat_json || modified}
         value={patJson}
         placeholder={patJsonPlaceholder}
         onChange={onChangePatJson}
