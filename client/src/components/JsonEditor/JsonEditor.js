@@ -50,6 +50,10 @@ const JsonEditor = () => {
     copied && setPatJson("");
   }, [copied, patJson]);
 
+  // useEffect(() => {
+  //   modified && setPatJson(patJson);
+  // }, [modified, patJson]);
+
   const modifyData = () => {
     const replacements = {
       tilepoolfrac: "dropdownselect",
