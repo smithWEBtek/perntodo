@@ -18,16 +18,19 @@
 .copied {
     border: 3px solid green;
     background-color: palegreen;
+    width: 10%;
 }
 
 .modified {
     border: 3px solid green;
     background-color: palegreen;
+    width: 10%;
 }
 
 .imported {
     border: 3px solid green;
-    background-color: rgb(185, 232, 185);
+    background-color: palegreen;
+    width: 10%;
 }
 
 .jsonform {
@@ -38,5 +41,12 @@ button {
     border-radius: 7px;
     margin-right: 10px;
     width: auto;
+    height: 30px;
+}
+
+.editor-control {
+    border-radius: 7px;
+    margin-right: 10px;
+    width: 10%;
     height: 30px;
 }
