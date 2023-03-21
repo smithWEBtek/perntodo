@@ -23,9 +23,10 @@ app.post("/todos", async (req, res) => {
 // create a problem
 app.post("/problem", async (req, res) => {
   console.log('********req.body: ', req.body)
+
   try {
     const { pat_problem_id, asset_id, pat_json, pat_json_modified } = req.body
-    const newProblem = await pool.query("INSERT INTO problem (pat_problem_id, asset_id, pat_json, pat_json_modified ) VALUES($1, $2, $3, $4) returning *", [pat_problem_id, asset_id, pat_json, pat_json_modified])
+    const newProblem = await pool.query("INSERT INTO problem (asset_id, pat_problem_id, pat_json_modified, pat_json ) VALUES($1,$2,$3,$4) returning *", [asset_id, pat_problem_id, pat_json_modified, pat_json])
     return res.json(newProblem.rows[0])
   } catch (err) {
     console.log(err.message)
