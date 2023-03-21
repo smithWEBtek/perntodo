@@ -85,12 +85,13 @@ const JsonEditor = () => {
   };
 
   const importModifiedData = () => {
-    console.log('*******');
-    console.log('patProblem importModifiedData: ', patProblem);
+    // console.log('*******');
+    // console.log('patProblem importModifiedData: ', patProblem);
 
-    JsonImport(patProblem)
-    setImported(true)
-    setImportBtnText("IMPORTED");
+    // JsonImport(patProblem)
+    JsonImport()
+    // setImported(true)
+    // setImportBtnText("IMPORTED");
   };
 
   const resetForm = () => {
