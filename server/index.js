@@ -33,6 +33,16 @@ app.post("/problem", async (req, res) => {
   }
 });
 
+// get problems
+app.get("/problems", async (req, res) => {
+  try {
+    const allProblems = await pool.query("SELECT * from problem");
+    res.json(allProblems.rows)
+  } catch (error) {
+    console.error(error.message)
+  }
+});
+
 // get all todos
 app.get("/todos", async (req, res) => {
   try {
