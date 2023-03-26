@@ -1,12 +1,12 @@
-import SampleJson from "./JsonSample";
+// import SampleJson from "./JsonSample";
 import SampleJson2 from "./JsonSample2";
 
-const data = {
-  asset_id: SampleJson.asset_id,
-  pat_problem_id: SampleJson.pat_problem_id,
-  pat_json_modified: `${JSON.stringify(SampleJson.pat_json_modified)}`,
-  pat_json: SampleJson.pat_json,
-};
+// const data = {
+//   asset_id: SampleJson.asset_id,
+//   pat_problem_id: SampleJson.pat_problem_id,
+//   pat_json_modified: `${JSON.stringify(SampleJson.pat_json_modified)}`,
+//   pat_json: SampleJson.pat_json,
+// };
 
 const data1 = {
   asset_id: SampleJson2.asset_id,
