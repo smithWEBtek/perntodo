@@ -1,14 +1,6 @@
-// import SampleJson from "./JsonSample";
 import SampleJson2 from "./JsonSample2";
 
-// const data = {
-//   asset_id: SampleJson.asset_id,
-//   pat_problem_id: SampleJson.pat_problem_id,
-//   pat_json_modified: `${JSON.stringify(SampleJson.pat_json_modified)}`,
-//   pat_json: SampleJson.pat_json,
-// };
-
-const data1 = {
+const data = {
   asset_id: SampleJson2.asset_id,
   pat_problem_id: SampleJson2.pat_problem_id,
   pat_json_modified: `${JSON.stringify(SampleJson2.pat_json_modified)}`,
@@ -19,7 +11,7 @@ const data1 = {
 const JsonImport = async () => {
   try {
     // const body = { problem };
-    const body = data1;
+    const body = data;
     await fetch("http://localhost:5000/problem", {
       method: "post",
       headers: { "Content-Type": "application/json" },
