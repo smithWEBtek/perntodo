@@ -57,7 +57,6 @@ const JsonEditor = () => {
   const modifyData = () => {
     const replacements = {
       tilepoolfrac: "dropdownselect",
-      TilePoolTemplate: "TilePool2",
       tilepool: "dropdownselect",
     };
     setPatJson(
